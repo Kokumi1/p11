@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.LoginActivity">
+
+    <TextView
+        android:id="@+id/login_title_text"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:text="@string/login_title"
+        android:textSize="40sp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="50dp"
+        />
+
+    <EditText
+        android:id="@+id/login_edit"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_alignTop="@id/login_title_text"
+        android:layout_marginTop="150dp"
+        android:layout_marginStart="80dp"
+        android:autofillHints="login"
+        android:hint="@string/login_login"
+        android:inputType="text"/>
+
+    <EditText
+        android:id="@+id/login_password_edit"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_alignTop="@id/login_edit"
+        android:layout_marginTop="150dp"
+        android:layout_marginStart="80dp"
+        android:autofillHints="password"
+        android:hint="@string/login_password"
+        android:inputType="textPassword"/>
+
+</RelativeLayout>
