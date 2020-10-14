@@ -14,4 +14,7 @@
 
     <string name="comment_username">username</string>
     <string name="comment_content">content of a comment</string>
+
+    <string name="main_gamename">game name</string>
+    <string name="main_newstitle">news title</string>
 </resources>
