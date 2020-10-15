@@ -17,4 +17,7 @@
 
     <string name="main_gamename">game name</string>
     <string name="main_newstitle">news title</string>
+
+    <string name="tab_news">News</string>
+    <string name="tab_comment">Comment</string>
 </resources>
