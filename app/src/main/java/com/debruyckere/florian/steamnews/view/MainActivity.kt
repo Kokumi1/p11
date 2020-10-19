@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         val data : ArrayList<News> = ArrayList()
 
-        val rv : RecyclerView = findViewById(R.id.comment_recycler)
+        val rv : RecyclerView = findViewById(R.id.main_recycler)
         rv.layoutManager = LinearLayoutManager(baseContext)
         rv.adapter = NewsAdapter(data,this)
 

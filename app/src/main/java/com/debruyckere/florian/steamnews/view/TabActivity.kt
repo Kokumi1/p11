@@ -1,6 +1,5 @@
 package com.debruyckere.florian.steamnews.view
 
-import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -20,6 +19,8 @@ class TabActivity : AppCompatActivity() {
         setContentView(R.layout.activity_tab)
 
         viewPager = findViewById(R.id.tab_viewpager)
+        val adapter = tabAdapter(supportFragmentManager,2)
+        viewPager!!.adapter = adapter
     }
 
 
