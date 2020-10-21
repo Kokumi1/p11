@@ -4,9 +4,7 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,12 +19,41 @@ class MainActivity : AppCompatActivity() {
 
         val data : ArrayList<News> = ArrayList()
 
+        //RecyclerView
         val rv : RecyclerView = findViewById(R.id.main_recycler)
         rv.layoutManager = LinearLayoutManager(baseContext)
         rv.adapter = NewsAdapter(data,this)
 
+        //Toolbar
+        setSupportActionBar(findViewById(R.id.main_toolbar))
+
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean =
+
+        when (item.itemId){
+
+            R.id.toolbar_login -> {
+                val loginIntent = Intent(this, LoginActivity::class.java)
+                startActivity(loginIntent)
+                true
+            }
+
+            R.id.toolbar_config-> {
+                val configIntent = Intent(this, ConfigActivity::class.java)
+                startActivity(configIntent)
+                true
+            }
+
+            else-> super.onOptionsItemSelected(item)
+        }
+
+    }
 
     class NewsAdapter(private val pData : List<News>,private val pContext: Context) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>(){
 
@@ -63,4 +90,4 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
-}
+

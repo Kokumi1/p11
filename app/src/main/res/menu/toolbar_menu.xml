@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/toolbar_login"
+        android:title="@string/toolbar_login"
+        android:icon="@android:drawable/presence_offline"
+        app:showAsAction="ifRoom"
+        />
+
+    <item
+        android:id="@+id/toolbar_config"
+        android:title="@string/toolbar_config"
+        android:icon="@android:drawable/ic_menu_preferences"
+        app:showAsAction="ifRoom"
+        />
+
+</menu>

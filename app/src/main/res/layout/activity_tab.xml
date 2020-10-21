@@ -8,6 +8,12 @@
     tools:context=".view.TabActivity">
 
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/tab_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"/>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/tab_viewpager"

@@ -20,4 +20,7 @@
 
     <string name="tab_news">News</string>
     <string name="tab_comment">Comment</string>
+
+    <string name="toolbar_config">Configuration</string>
+    <string name="toolbar_login">Login</string>
 </resources>
