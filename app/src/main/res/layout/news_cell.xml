@@ -9,13 +9,15 @@
         android:id="@+id/main_game"
         android:layout_width="match_parent"
         android:layout_height="20dp"
-        android:text="@string/main_gamename"/>
+        android:text="@string/main_gamename"
+        android:textColor="#000000"/>
 
     <TextView
         android:id="@+id/main_title"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:text="@string/main_newstitle"
-        android:textSize="30sp"/>
+        android:textSize="30sp"
+        android:textColor="#000000"/>
 
 </LinearLayout>

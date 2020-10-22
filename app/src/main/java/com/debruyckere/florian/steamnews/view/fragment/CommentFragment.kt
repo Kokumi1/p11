@@ -14,15 +14,20 @@ import com.debruyckere.florian.steamnews.model.Comment
 
 class CommentFragment : Fragment() {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-        
-        val rv : RecyclerView = view!!.findViewById(R.id.comment_recycler)
-        rv.layoutManager = LinearLayoutManager(this.context)
-        rv.adapter = CommentAdapter()
+
+
 
         return inflater.inflate(R.layout.fragment_comment, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val rv : RecyclerView = requireView().findViewById(R.id.comment_recycler)
+        rv.layoutManager = LinearLayoutManager(this.context)
+        rv.adapter = CommentAdapter()
     }
 
     class CommentAdapter: RecyclerView.Adapter<CommentAdapter.CommentViewHolder>(){
