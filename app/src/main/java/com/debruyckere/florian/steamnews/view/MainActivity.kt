@@ -2,18 +2,20 @@ package com.debruyckere.florian.steamnews.view
 
 import android.content.Context
 import android.content.Intent
+import android.os.AsyncTask
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.debruyckere.florian.steamnews.BuildConfig
 import com.debruyckere.florian.steamnews.R
 import com.debruyckere.florian.steamnews.model.News
+import com.debruyckere.florian.steamnews.services.ApiTalker
 import com.debruyckere.florian.steamnews.viewmodel.NewsDownloader
 
 private var mNewsDownloader : NewsDownloader? = null
@@ -27,8 +29,6 @@ class MainActivity : AppCompatActivity() {
 
         val data : List<News> = mNewsDownloader!!.getNews().value!!
 
-        Log.d("Main DEBUG", "data value: "+data[0].gameName)
-
         //RecyclerView
         val rv : RecyclerView = findViewById(R.id.main_recycler)
         rv.layoutManager = LinearLayoutManager(baseContext)
@@ -38,10 +38,29 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.main_toolbar))
 
         //ViewModel update
-        mNewsDownloader!!.getNews().observe(this, Observer {
+        mNewsDownloader!!.getNews().observe(this, {
             rv.swapAdapter(NewsAdapter(data,this), false)
         })
 
+        val async = Async(this)
+        async.execute("")
+
+    }
+
+    class Async(val pContext: Context) : AsyncTask<String,Void,Void?>(){
+        override fun doInBackground(vararg params: String?): Void? {
+            val apiTalker = ApiTalker()
+            apiTalker.login("","",pContext)
+            return null
+        }
+
+        override fun onPreExecute() {
+            super.onPreExecute()
+        }
+
+        override fun onPostExecute(result: Void?) {
+            super.onPostExecute(result)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

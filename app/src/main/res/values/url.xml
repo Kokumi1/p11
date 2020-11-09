@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="steamId_url">http://api.steampowered.com/</string>
+    <string name="ownedGame_url">http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/</string>
+    <string name="gameNews_url">http://api.steampowered.com/ISteamNews/GetNewsForApp/v0002/</string>
+
+</resources>
