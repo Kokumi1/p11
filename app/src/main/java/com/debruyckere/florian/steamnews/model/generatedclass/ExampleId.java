@@ -12,36 +12,23 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "steamid",
-    "success"
+    "response"
 })
-public class Response {
+public class ExampleId {
 
-    @JsonProperty("steamid")
-    private String steamid;
-    @JsonProperty("success")
-    private Integer success;
+    @JsonProperty("response")
+    private ResponseId response;
     @JsonIgnore
     private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("steamid")
-    public String getSteamid() {
-        return steamid;
+    @JsonProperty("response")
+    public ResponseId getResponseId() {
+        return response;
     }
 
-    @JsonProperty("steamid")
-    public void setSteamid(String steamid) {
-        this.steamid = steamid;
-    }
-
-    @JsonProperty("success")
-    public Integer getSuccess() {
-        return success;
-    }
-
-    @JsonProperty("success")
-    public void setSuccess(Integer success) {
-        this.success = success;
+    @JsonProperty("response")
+    public void setResponseId(ResponseId pResponse) {
+        this.response = pResponse;
     }
 
     @JsonAnyGetter

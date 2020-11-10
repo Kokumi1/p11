@@ -29,28 +29,36 @@ class ApiTalker {
                 .build()
 
             return retrofit.create(ApiService::class.java)
-
         }
     }
 
-    fun login(pUsername : String, pPassword : String, pContext: Context){
+    fun login(pUsername : String, pPassword : String, pContext: Context): String{
 
         val apiServe by lazy { create(pContext) }
+        var retour = ""
 
-        disposable = apiServe.steamIdGetter(BuildConfig.API_KEY,pUsername)
+        disposable = apiServe.steamIdGetter(BuildConfig.API_KEY,"dflorian")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { result -> Log.d("retrofit", "steamId: "+result.response.steamid) },
-                { error -> Log.e("retrofit: ", error.stackTraceToString()) }
+                { result -> retour = result.responseId.steamid },
+                { error -> Log.e("retrofit ID: ", error.stackTraceToString()) })
 
-            )
+        return retour
     }
 
-    fun getGames(pUserId : Int){
+    fun getGames(pUserId : String, pContext: Context){
         //id 76561198358887469
-        //TODO: get owned games with user id*
-        //http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=XXXXXXXXXXXXXXXXX&steamid=76561197960434622&include_played_free_games=true&format=json
+
+        val apiServe by lazy { create(pContext) }
+
+        disposable = apiServe.steamGamesGetter(BuildConfig.API_KEY,pUserId,true)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(
+                { result -> Log.d("retrofit GAME", "GameCount: "+result.response.games.size) },
+                { error -> Log.e("retrofit GAME: ", error.stackTraceToString()) })
+
     }
 
     fun getNews(pGameId : Int){

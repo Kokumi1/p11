@@ -47,10 +47,12 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    class Async(val pContext: Context) : AsyncTask<String,Void,Void?>(){
-        override fun doInBackground(vararg params: String?): Void? {
-            val apiTalker = ApiTalker()
-            apiTalker.login("","",pContext)
+    class Async(private val pContext: Context) : AsyncTask<String,Void,String?>(){
+        val apiTalker = ApiTalker()
+
+        override fun doInBackground(vararg params: String?): String? {
+            val steamId =apiTalker.login("dflorian","",pContext)
+            Log.d("steamId : ",steamId)
             return null
         }
 
@@ -58,7 +60,10 @@ class MainActivity : AppCompatActivity() {
             super.onPreExecute()
         }
 
-        override fun onPostExecute(result: Void?) {
+        override fun onPostExecute(result: String?) {
+            //if(result!= null && result!="") apiTalker.getGames(result, pContext)
+            //else Log.d("retrofit GAME","ID Null")
+            apiTalker.getGames("76561198358887469",pContext)
             super.onPostExecute(result)
         }
     }
