@@ -34,7 +34,7 @@ public class Game {
     @JsonProperty("playtime_2weeks")
     private Integer playtime2weeks;
     @JsonIgnore
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    private final Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("appid")
     public Integer getAppid() {

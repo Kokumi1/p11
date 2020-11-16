@@ -1,7 +1,7 @@
 package com.debruyckere.florian.steamnews.services
 
-import com.debruyckere.florian.steamnews.model.generatedclass.ExampleGame
-import com.debruyckere.florian.steamnews.model.generatedclass.ExampleId
+import com.debruyckere.florian.steamnews.model.generatedclass.ResponseGame
+import com.debruyckere.florian.steamnews.model.generatedclass.ResponseId
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -15,13 +15,13 @@ interface ApiService {
     fun steamIdGetter(
         @Query("key") key: String,
         @Query("vanityurl") vanityurl: String):
-            Observable<ExampleId>
+            Observable<ResponseId>
 
     @GET("IPlayerService/GetOwnedGames/v0001/")
     fun steamGamesGetter(
         @Query("key")key: String,
         @Query("steamid")steamid: String,
         @Query("include_played_free_games")includeFreeGames: Boolean
-    ): Observable<ExampleGame>
+    ): Observable<ResponseGame>
 
 }
