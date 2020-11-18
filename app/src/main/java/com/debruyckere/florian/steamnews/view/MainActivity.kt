@@ -13,9 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.debruyckere.florian.steamnews.R
 import com.debruyckere.florian.steamnews.model.News
-import com.debruyckere.florian.steamnews.viewmodel.NewsDownloader
+import com.debruyckere.florian.steamnews.viewmodel.MainViewModel
 
-private var mNewsDownloader: NewsDownloader? = null
+private var mMainViewModel: MainViewModel? = null
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val data: MutableList<News> = mutableListOf()
-        mNewsDownloader = ViewModelProvider(this).get(NewsDownloader::class.java)
+        mMainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         //RecyclerView
         val rv: RecyclerView = findViewById(R.id.main_recycler)
@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
 
         //ViewModel update
-        mNewsDownloader!!.getNews(this).observe(this) { list: List<News> ->
+        mMainViewModel!!.getNews(this).observe(this) { list: List<News> ->
             run {
                 data.clear()
                 data.addAll(list)

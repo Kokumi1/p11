@@ -8,7 +8,7 @@ import org.w3c.dom.Comment
 /**
  * Created by Debruyckère Florian on 07/10/2020.
  */
-class CommentDownloader : ViewModel() {
+class CommentViewModel : ViewModel() {
 
     private var mComment : MutableLiveData<List<Comment>>? = null
     

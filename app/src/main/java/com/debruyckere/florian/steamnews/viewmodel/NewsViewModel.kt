@@ -7,7 +7,7 @@ import java.net.URL
 /**
  * Created by Debruyckère Florian on 07/10/2020.
  */
-class WebDownloader : ViewModel() {
+class NewsViewModel : ViewModel() {
 
     private var mWeb : LiveData<URL>? = null
 

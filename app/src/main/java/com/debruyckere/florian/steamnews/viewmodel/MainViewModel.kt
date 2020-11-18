@@ -13,7 +13,7 @@ import com.debruyckere.florian.steamnews.services.ApiTalker
 /**
  * Created by Debruyckère Florian on 07/10/2020.
  */
-class NewsDownloader(private val pContext: Context) : ViewModel() {
+class MainViewModel(private val pContext: Context) : ViewModel() {
 
     private var mNews : MutableLiveData<List<News>> = MutableLiveData()
 
@@ -29,7 +29,7 @@ class NewsDownloader(private val pContext: Context) : ViewModel() {
 
         apiTalker.getGames("76561198358887469",pContext).observe(pCycle){
             list : List<Game> -> kotlin.run {
-            Log.d("GetGames",list.size.toString())
+                Log.d("GetGames",list.size.toString())
 
             }
         }
