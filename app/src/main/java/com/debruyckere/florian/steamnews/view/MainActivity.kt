@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.debruyckere.florian.steamnews.R
 import com.debruyckere.florian.steamnews.model.News
+import com.debruyckere.florian.steamnews.model.generatedclass.Newsitem
 import com.debruyckere.florian.steamnews.viewmodel.MainViewModel
 
 private var mMainViewModel: MainViewModel? = null
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val data: MutableList<News> = mutableListOf()
+        val data: MutableList<Newsitem> = mutableListOf()
         mMainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
         //RecyclerView
@@ -32,7 +33,7 @@ class MainActivity : AppCompatActivity() {
 
 
         //ViewModel update
-        mMainViewModel!!.getNews(this).observe(this) { list: List<News> ->
+        mMainViewModel!!.getNews(this, this).observe(this) { list: List<Newsitem> ->
             run {
                 data.clear()
                 data.addAll(list)
@@ -70,7 +71,7 @@ class MainActivity : AppCompatActivity() {
 
 }
 
-class NewsAdapter(private val pData: List<News>, private val pContext: Context) :
+class NewsAdapter(private val pData: List<Newsitem>, private val pContext: Context) :
     RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
@@ -95,10 +96,10 @@ class NewsAdapter(private val pData: List<News>, private val pContext: Context) 
         private val newsTitleNews: TextView = pView.findViewById(R.id.main_title)
         private val newsLayout: LinearLayout = pView.findViewById(R.id.main_layout)
 
-        fun display(pNews: News) {
-            Log.d("AdapterHolder", "pNews: " + pNews.gameName)
+        fun display(pNews: Newsitem) {
+            Log.d("AdapterHolder", "pNews: " + pNews.title)
 
-            newsGameNews.text = pNews.gameName
+            newsGameNews.text = pNews.feedname
             newsTitleNews.text = pNews.title
 
             newsLayout.setOnClickListener {

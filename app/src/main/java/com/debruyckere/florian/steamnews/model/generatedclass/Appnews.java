@@ -13,36 +13,49 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "game_count",
-    "games"
+    "appid",
+    "newsitems",
+    "count"
 })
-public class ResponseGame {
+public class Appnews {
 
-    @JsonProperty("game_count")
-    private Integer gameCount;
-    @JsonProperty("games")
-    private List<Game> games = null;
+    @JsonProperty("appid")
+    private Integer appid;
+    @JsonProperty("newsitems")
+    private List<Newsitem> newsitems = null;
+    @JsonProperty("count")
+    private Integer count;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("game_count")
-    public Integer getGameCount() {
-        return gameCount;
+    @JsonProperty("appid")
+    public Integer getAppid() {
+        return appid;
     }
 
-    @JsonProperty("game_count")
-    public void setGameCount(Integer gameCount) {
-        this.gameCount = gameCount;
+    @JsonProperty("appid")
+    public void setAppid(Integer appid) {
+        this.appid = appid;
     }
 
-    @JsonProperty("games")
-    public List<Game> getGames() {
-        return games;
+    @JsonProperty("newsitems")
+    public List<Newsitem> getNewsitems() {
+        return newsitems;
     }
 
-    @JsonProperty("games")
-    public void setGames(List<Game> games) {
-        this.games = games;
+    @JsonProperty("newsitems")
+    public void setNewsitems(List<Newsitem> newsitems) {
+        this.newsitems = newsitems;
+    }
+
+    @JsonProperty("count")
+    public Integer getCount() {
+        return count;
+    }
+
+    @JsonProperty("count")
+    public void setCount(Integer count) {
+        this.count = count;
     }
 
     @JsonAnyGetter

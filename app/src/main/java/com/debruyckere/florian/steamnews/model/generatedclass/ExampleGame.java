@@ -2,7 +2,6 @@
 package com.debruyckere.florian.steamnews.model.generatedclass;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
@@ -13,36 +12,23 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "game_count",
-    "games"
+    "response"
 })
-public class ResponseGame {
+public class ExampleGame {
 
-    @JsonProperty("game_count")
-    private Integer gameCount;
-    @JsonProperty("games")
-    private List<Game> games = null;
+    @JsonProperty("response")
+    private ResponseGame responseGame;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("game_count")
-    public Integer getGameCount() {
-        return gameCount;
+    @JsonProperty("response")
+    public ResponseGame getResponseGame() {
+        return responseGame;
     }
 
-    @JsonProperty("game_count")
-    public void setGameCount(Integer gameCount) {
-        this.gameCount = gameCount;
-    }
-
-    @JsonProperty("games")
-    public List<Game> getGames() {
-        return games;
-    }
-
-    @JsonProperty("games")
-    public void setGames(List<Game> games) {
-        this.games = games;
+    @JsonProperty("response")
+    public void setResponseGame(ResponseGame responseGame) {
+        this.responseGame = responseGame;
     }
 
     @JsonAnyGetter
