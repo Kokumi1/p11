@@ -14,21 +14,21 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     "response"
 })
-public class ExampleGame {
+public class ApiID {
 
     @JsonProperty("response")
-    private ResponseGame responseGame;
+    private ResponseId response;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("response")
-    public ResponseGame getResponseGame() {
-        return responseGame;
+    public ResponseId getResponse() {
+        return response;
     }
 
     @JsonProperty("response")
-    public void setResponseGame(ResponseGame responseGame) {
-        this.responseGame = responseGame;
+    public void setResponse(ResponseId response) {
+        this.response = response;
     }
 
     @JsonAnyGetter

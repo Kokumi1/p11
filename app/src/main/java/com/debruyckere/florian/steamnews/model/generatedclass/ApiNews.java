@@ -14,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({
     "appnews"
 })
-public class ExampleNews {
+public class ApiNews {
 
     @JsonProperty("appnews")
     private Appnews appnews;
