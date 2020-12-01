@@ -104,7 +104,7 @@ class NewsAdapter(private val pData: List<Newsitem>, private val pContext: Conte
 
             newsLayout.setOnClickListener {
                 val tabActivity = Intent(pContext, TabActivity::class.java)
-                // tabActivity.putExtra("news",pNews)
+                 tabActivity.putExtra("news",pNews.url)
                 pContext.startActivity(tabActivity)
             }
         }

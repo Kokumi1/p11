@@ -17,18 +17,18 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 public class ApiGame {
 
     @JsonProperty("response")
-    private ResponseGame responseGame;
+    private ResponseGame response;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
     @JsonProperty("response")
-    public ResponseGame getResponseGame() {
-        return responseGame;
+    public ResponseGame getResponse() {
+        return response;
     }
 
     @JsonProperty("response")
-    public void setResponseGame(ResponseGame responseGame) {
-        this.responseGame = responseGame;
+    public void setResponse(ResponseGame response) {
+        this.response = response;
     }
 
     @JsonAnyGetter

@@ -55,7 +55,7 @@ class ApiTalker {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { result -> retour.postValue(result.steamid) },
+                { result -> retour.postValue(result.response.steamid) },
                 { error -> Log.e("retrofit ID: ", error.stackTraceToString()) })
 
         return retour
@@ -70,12 +70,12 @@ class ApiTalker {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { result ->
-                    run {
-                        val gson = Gson().toJson(result)
-                        println(gson)
+                { result -> retour.postValue(result.response.games)
+                   /* run {
+                        /*val gson = Gson().toJson(result)
+                        println(gson)*/
                         retour.postValue(result.responseGame.games!!)
-                    }
+                    }*/
                 },
                 { error -> Log.e("retrofit GAME: ", error.stackTraceToString()) })
 
