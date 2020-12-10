@@ -12,11 +12,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.debruyckere.florian.steamnews.R
-import com.debruyckere.florian.steamnews.model.News
 import com.debruyckere.florian.steamnews.model.generatedclass.Newsitem
 import com.debruyckere.florian.steamnews.viewmodel.MainViewModel
 
-private var mMainViewModel: MainViewModel? = null
+private lateinit var mMainViewModel: MainViewModel
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
 
         //ViewModel update
-        mMainViewModel!!.getNews(this, this).observe(this) { list: List<Newsitem> ->
+        mMainViewModel.getNews(this, this).observe(this) { list: List<Newsitem> ->
             run {
                 data.clear()
                 data.addAll(list)

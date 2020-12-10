@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "324072356964",
+    "firebase_url": "https://steamid-747b6.firebaseio.com",
+    "project_id": "steamid-747b6",
+    "storage_bucket": "steamid-747b6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:324072356964:android:58c843670dfea431597371",
+        "android_client_info": {
+          "package_name": "com.debruyckere.florian.steamnews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "324072356964-djddgru7t8o37ea8a5v48bqlj33rl11e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBd9mrmMBkPi7W3s3DVJDPiueL39BZ1u0w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "324072356964-djddgru7t8o37ea8a5v48bqlj33rl11e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
