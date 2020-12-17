@@ -54,4 +54,13 @@
         android:layout_marginTop="150dp"
         android:layout_marginStart="130dp"/>
 
+    <Button
+        android:id="@+id/login_subscribe_button"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text="@string/login_subscribe_button"
+        android:layout_alignTop="@id/login_validation_button"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="130dp"/>
+
 </RelativeLayout>

@@ -11,6 +11,7 @@
     <string name="login_password">Password</string>
     <string name="login_title">Connect to Steam</string>
     <string name="login_validation_button">Log in</string>
+    <string name="login_subscribe_button">Subscribe</string>
 
     <string name="comment_username">username</string>
     <string name="comment_content">content of a comment</string>

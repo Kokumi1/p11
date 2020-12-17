@@ -12,13 +12,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.debruyckere.florian.steamnews.R
 import com.debruyckere.florian.steamnews.viewmodel.LoginViewModel
 import com.google.firebase.auth.FirebaseUser
-import org.w3c.dom.Text
 
 class LoginActivity: AppCompatActivity() {
 
-    private var userText : TextView? =null
-    private var passwordText : TextView? = null
-    private var validButton :  Button? =null
+    private lateinit var userText : TextView
+    private lateinit var passwordText : TextView
+    private lateinit var validButton :  Button
+    private lateinit var subscribeButton: Button
 
     private lateinit var mLoginViewModel : LoginViewModel
 
@@ -35,21 +35,35 @@ class LoginActivity: AppCompatActivity() {
         userText = findViewById(R.id.login_username_edit)
         validButton = findViewById(R.id.login_validation_button)
         passwordText = findViewById(R.id.login_password_edit)
+        subscribeButton = findViewById(R.id.login_subscribe_button)
 
-        validButton!!.setOnClickListener(){
-            val email = userText!!.text.toString()
-            val password = passwordText!!.text.toString()
+        validButton.setOnClickListener{
+            val email = userText.text.toString()
+            val password = passwordText.text.toString()
             Log.d("AUTHENTICATION","Mission Start")
 
-            //do authentification
+            //do authentication
             mLoginViewModel.getUser(email,password).observe(this){ user ->
                 if(user != null){
                     //show popup & return to main
 
-                    Log.d("AUTHENTICATION: ", "success welcome "+user.tenantId)
+                    Log.d("AUTHENTICATION: ", "success welcome back "+user.tenantId)
                 }
                 else{
                     Log.d("AUTHENTICATION: ","Mission Failed !!")
+                }
+            }
+        }
+
+        subscribeButton.setOnClickListener{
+            val email = userText.text.toString()
+            val password = passwordText.text.toString()
+
+            mLoginViewModel.createUser(email,password).observe(this){user ->
+                if(user != null){
+                    Log.d("SUBSCRIPTION","success welcome new user")
+                }else{
+                    Log.d("SUBSCRIPTION","No Don't enter. Failure")
                 }
             }
         }

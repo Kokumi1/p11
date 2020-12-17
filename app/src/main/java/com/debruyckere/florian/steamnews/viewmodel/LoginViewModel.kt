@@ -28,7 +28,7 @@ class LoginViewModel : ViewModel() {
         return mUser
     }
 
-    fun createUser(pEmail: String, pPassword: String){
+    fun createUser(pEmail: String, pPassword: String): LiveData<FirebaseUser?>{
         mAuth.createUserWithEmailAndPassword(pEmail,pPassword)
             .addOnCompleteListener{task ->
                 if(task.isSuccessful) mUser.postValue(mAuth.currentUser)
@@ -36,6 +36,7 @@ class LoginViewModel : ViewModel() {
                 else mUser.postValue(null)
             }
 
+        return mUser
     }
 
 
