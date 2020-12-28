@@ -9,6 +9,8 @@ import androidx.lifecycle.ViewModel
 import com.debruyckere.florian.steamnews.model.generatedclass.Game
 import com.debruyckere.florian.steamnews.model.generatedclass.Newsitem
 import com.debruyckere.florian.steamnews.services.ApiTalker
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 /**
  * Created by Debruyckère Florian on 07/10/2020.

@@ -1,10 +1,13 @@
 package com.debruyckere.florian.steamnews.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 /**
  * Created by Debruyckère Florian on 07/10/2020.
@@ -13,6 +16,7 @@ class LoginViewModel : ViewModel() {
 
     private var mAuth : FirebaseAuth = FirebaseAuth.getInstance()
     private var mUser : MutableLiveData<FirebaseUser?> = MutableLiveData()
+    private val db = Firebase.firestore
 
     fun getUser(pEmail: String, pPassword : String): LiveData<FirebaseUser?>{
         //auth = FirebaseAuth.getInstance()
@@ -21,7 +25,21 @@ class LoginViewModel : ViewModel() {
 
         mAuth.signInWithEmailAndPassword(pEmail,pPassword)
             .addOnCompleteListener{ task ->
-                if(task.isSuccessful) mUser.postValue(mAuth.currentUser)
+                if(task.isSuccessful) {
+                    mUser.postValue(mAuth.currentUser)
+
+                    db.collection("userId")
+                        //.whereEqualTo("firebaseUser",mAuth.currentUser!!.uid)
+                        .get()
+                        .addOnSuccessListener { result->
+                            for(document in result){
+                                Log.d("FIRESTORE ","recherche complete: "+document.id +" "+ document.data)
+                            }
+                        }
+                        .addOnFailureListener{exception -> Log.d("FIRESTORE",
+                            "Recheche Failed! $exception"
+                        ) }
+                }
 
                 else mUser.postValue(null)
             }
