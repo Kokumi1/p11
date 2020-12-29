@@ -7,6 +7,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.debruyckere.florian.steamnews.R
@@ -47,7 +48,10 @@ class LoginActivity: AppCompatActivity() {
                 if(user != null){
                     //show popup & return to main
 
-                    Log.d("AUTHENTICATION: ", "success welcome back "+user.tenantId)
+                    userData = user
+                    Log.d("AUTHENTICATION: ", "success welcome back "+ userData!!.uid)
+
+                    startActivity(Intent(this,MainActivity::class.java))
                 }
                 else{
                     Log.d("AUTHENTICATION: ","Mission Failed !!")
@@ -80,19 +84,20 @@ class LoginActivity: AppCompatActivity() {
         when (item.itemId){
 
             R.id.toolbar_login -> {
-                val loginIntent = Intent(this, LoginActivity::class.java)
-                startActivity(loginIntent)
+                //val loginIntent = Intent(this, LoginActivity::class.java)
+                //startActivity(loginIntent)
+                Toast.makeText(this,"You already are in that place",Toast.LENGTH_SHORT)
                 true
             }
 
             R.id.toolbar_config-> {
-                val configIntent = Intent(this, ConfigActivity::class.java)
-                startActivity(configIntent)
+                startActivity(Intent(this, ConfigActivity::class.java))
                 true
             }
             android.R.id.home-> {
-                val homeIntent = Intent(this, MainActivity::class.java)
-                startActivity(homeIntent)
+                //val homeIntent = Intent(this, MainActivity::class.java)
+                //startActivity(homeIntent)
+                Toast.makeText(this,"You have to log before.",Toast.LENGTH_LONG)
                 true
             }
 

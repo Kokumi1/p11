@@ -1,5 +1,6 @@
 package com.debruyckere.florian.steamnews.viewmodel
 
+import android.content.Intent
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -39,6 +40,8 @@ class LoginViewModel : ViewModel() {
                         .addOnFailureListener{exception -> Log.d("FIRESTORE",
                             "Recheche Failed! $exception"
                         ) }
+
+
                 }
 
                 else mUser.postValue(null)
@@ -55,7 +58,7 @@ class LoginViewModel : ViewModel() {
 
                     val data = hashMapOf(
                     "firebaseUser" to mAuth.currentUser!!.uid,
-                    "steamId" to "27"
+                    "steamId" to "27"       //to change
                     )
 
                     db.collection("userId").document()
