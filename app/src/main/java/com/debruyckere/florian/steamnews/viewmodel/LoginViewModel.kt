@@ -49,9 +49,28 @@ class LoginViewModel : ViewModel() {
     fun createUser(pEmail: String, pPassword: String): LiveData<FirebaseUser?>{
         mAuth.createUserWithEmailAndPassword(pEmail,pPassword)
             .addOnCompleteListener{task ->
-                if(task.isSuccessful) mUser.postValue(mAuth.currentUser)
+                if(task.isSuccessful){
+                    Log.d("SUBSCRIPTION","SUBSCRIBE SUCCESS")
+                    mUser.postValue(mAuth.currentUser)
 
-                else mUser.postValue(null)
+                    val data = hashMapOf(
+                    "firebaseUser" to mAuth.currentUser!!.uid,
+                    "steamId" to "27"
+                    )
+
+                    db.collection("userId").document()
+                        .set(data)
+                        .addOnCompleteListener{fireTask ->
+                            if(fireTask.isSuccessful) Log.d("FIRESTORE","data created with success")
+                            else Log.d("FIRESTORE","Huge fail during subscription")
+                        }
+                }
+                else {
+                    Log.d("SUBSCRIPTION","SUBSCRIBE FAILED!")
+                    mUser.postValue(null)
+
+
+                }
             }
 
         return mUser

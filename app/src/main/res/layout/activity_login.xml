@@ -51,7 +51,7 @@
         android:layout_height="50dp"
         android:text="@string/login_validation_button"
         android:layout_alignTop="@id/login_password_edit"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="100dp"
         android:layout_marginStart="130dp"/>
 
     <Button
