@@ -97,13 +97,13 @@ class NewsAdapter(private val pData: List<Newsitem>, private val pContext: Conte
 
         fun display(pNews: Newsitem) {
             Log.d("AdapterHolder", "pNews: " + pNews.title)
-
             newsGameNews.text = pNews.feedname
             newsTitleNews.text = pNews.title
 
             newsLayout.setOnClickListener {
                 val tabActivity = Intent(pContext, TabActivity::class.java)
-                 tabActivity.putExtra("news",pNews.url)
+                 tabActivity.putExtra("newsUrl",pNews.url)
+                tabActivity.putExtra("newsId",pNews.gid)
                 pContext.startActivity(tabActivity)
             }
         }

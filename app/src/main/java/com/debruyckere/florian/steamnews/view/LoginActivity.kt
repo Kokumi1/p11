@@ -63,7 +63,7 @@ class LoginActivity: AppCompatActivity() {
             val email = userText.text.toString()
             val password = passwordText.text.toString()
 
-            mLoginViewModel.createUser(email,password).observe(this){user ->
+            mLoginViewModel.createUser(email,password,this,this).observe(this){user ->
                 if(user != null){
                     Log.d("SUBSCRIPTION","success welcome new user")
                 }else{

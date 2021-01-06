@@ -22,7 +22,7 @@ class NewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_news, container, false)
-        val bundleUrl = requireArguments().get("news").toString()
+        val bundleUrl = requireArguments().get("newsUrl").toString()
 
         mViewModel = ViewModelProvider(this).get(NewsViewModel::class.java)
         mViewModel!!.setWeb(bundleUrl)

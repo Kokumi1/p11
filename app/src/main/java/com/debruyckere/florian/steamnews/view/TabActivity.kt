@@ -24,9 +24,11 @@ class TabActivity : AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.tab_toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val extra = intent.getStringExtra("news")
+        val extraId = intent.getStringExtra("newsId")
+        val extraUrl = intent.getStringExtra("newsUrl")
         val bundle = Bundle()
-        bundle.putString("news",extra)
+        bundle.putString("newsId",extraId)
+        bundle.putString("newsUrl",extraUrl)
 
         viewPager = findViewById(R.id.tab_viewpager)
         val adapter = TabAdapter(supportFragmentManager,2,bundle)
@@ -76,7 +78,10 @@ class TabActivity : AppCompatActivity() {
                     fragment.arguments = pBundle
                     return fragment }
 
-                1 -> return CommentFragment()
+                1 -> run{
+                    val fragment = CommentFragment()
+                    fragment.arguments = pBundle
+                    return fragment  }
 
                 else -> run{
                     val fragment = NewsFragment()

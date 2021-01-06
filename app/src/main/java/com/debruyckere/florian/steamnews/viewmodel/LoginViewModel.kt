@@ -1,10 +1,12 @@
 package com.debruyckere.florian.steamnews.viewmodel
 
-import android.content.Intent
+import android.content.Context
 import android.util.Log
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.debruyckere.florian.steamnews.services.ApiTalker
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.ktx.firestore
@@ -30,11 +32,12 @@ class LoginViewModel : ViewModel() {
                     mUser.postValue(mAuth.currentUser)
 
                     db.collection("userId")
-                        //.whereEqualTo("firebaseUser",mAuth.currentUser!!.uid)
+                        .whereEqualTo("firebaseUser",mAuth.currentUser!!.uid)
                         .get()
                         .addOnSuccessListener { result->
                             for(document in result){
                                 Log.d("FIRESTORE ","recherche complete: "+document.id +" "+ document.data)
+                                //TODO: save somewhere steam id for apply
                             }
                         }
                         .addOnFailureListener{exception -> Log.d("FIRESTORE",
@@ -49,17 +52,23 @@ class LoginViewModel : ViewModel() {
         return mUser
     }
 
-    fun createUser(pEmail: String, pPassword: String): LiveData<FirebaseUser?>{
+    fun createUser(pEmail: String, pPassword: String,pContext: Context,pLifecycleOwner: LifecycleOwner): LiveData<FirebaseUser?>{
         mAuth.createUserWithEmailAndPassword(pEmail,pPassword)
             .addOnCompleteListener{task ->
                 if(task.isSuccessful){
                     Log.d("SUBSCRIPTION","SUBSCRIBE SUCCESS")
                     mUser.postValue(mAuth.currentUser)
 
-                    val data = hashMapOf(
-                    "firebaseUser" to mAuth.currentUser!!.uid,
-                    "steamId" to "27"       //to change
-                    )
+                    var steamId = ""
+                    lateinit var data : HashMap<String,String>
+                    val apiTalker = ApiTalker()
+                    apiTalker.login("steamUser","",pContext).observe(pLifecycleOwner){ result ->
+                        steamId = result
+                            data = hashMapOf(
+                            "firebaseUser" to mAuth.currentUser!!.uid,
+                            "steamId" to steamId       //TODO: Add edit pop up for get steam user name and search
+                        )
+                    }
 
                     db.collection("userId").document()
                         .set(data)
