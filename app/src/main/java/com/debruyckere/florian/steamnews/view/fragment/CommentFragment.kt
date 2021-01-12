@@ -1,26 +1,30 @@
 package com.debruyckere.florian.steamnews.view.fragment
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.TextView
+import android.widget.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.debruyckere.florian.steamnews.R
 import com.debruyckere.florian.steamnews.model.Comment
 import com.debruyckere.florian.steamnews.viewmodel.CommentViewModel
+import com.google.firebase.auth.FirebaseAuth
 
 
 class CommentFragment : Fragment() {
 
     private lateinit var mViewModel: CommentViewModel
     private lateinit var mBundleUrl: String
+    private val mAuth = FirebaseAuth.getInstance()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
+    @SuppressLint("InflateParams")
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_comment, container, false)
 
@@ -29,7 +33,21 @@ class CommentFragment : Fragment() {
 
         val addButton : ImageButton = view.findViewById(R.id.comment_add)
         addButton.setOnClickListener{
-            //TODO: add Comment POP up
+            val dialog = AlertDialog.Builder(this.context)
+            dialog.setTitle("Comment")
+            dialog.setMessage("write your comment")
+            val alertView : View = inflater.inflate(R.layout.comment_pop,null)
+            dialog.setView(alertView)
+
+            val alertEdit = alertView.findViewById<EditText>(R.id.comment_edit)
+            val alertButton = alertView.findViewById<Button>(R.id.comment_button)
+            alertButton.setOnClickListener{
+                mViewModel.addComment(Comment(mAuth.currentUser!!.displayName!!,alertEdit.text.toString()) , mBundleUrl)
+                //TODO: Close that things!
+            }
+
+            val alertDialog = dialog.create()
+            alertDialog.show()
         }
 
         return view

@@ -37,7 +37,6 @@ class LoginViewModel : ViewModel() {
                         .addOnSuccessListener { result->
                             for(document in result){
                                 Log.d("FIRESTORE ","recherche complete: "+document.id +" "+ document.data)
-                                //TODO: save somewhere steam id for apply
                             }
                         }
                         .addOnFailureListener{exception -> Log.d("FIRESTORE",
@@ -52,17 +51,17 @@ class LoginViewModel : ViewModel() {
         return mUser
     }
 
-    fun createUser(pEmail: String, pPassword: String,pContext: Context,pLifecycleOwner: LifecycleOwner): LiveData<FirebaseUser?>{
+    fun createUser(pEmail: String, pPassword: String,pUsername: String ,pContext: Context,pLifecycleOwner: LifecycleOwner): LiveData<FirebaseUser?>{
         mAuth.createUserWithEmailAndPassword(pEmail,pPassword)
             .addOnCompleteListener{task ->
                 if(task.isSuccessful){
                     Log.d("SUBSCRIPTION","SUBSCRIBE SUCCESS")
                     mUser.postValue(mAuth.currentUser)
 
-                    var steamId = ""
+                    lateinit var steamId : String
                     lateinit var data : HashMap<String,String>
                     val apiTalker = ApiTalker()
-                    apiTalker.login("steamUser","",pContext).observe(pLifecycleOwner){ result ->
+                    apiTalker.login(pUsername,"",pContext).observe(pLifecycleOwner){ result ->
                         steamId = result
                             data = hashMapOf(
                             "firebaseUser" to mAuth.currentUser!!.uid,

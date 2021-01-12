@@ -1,11 +1,15 @@
 package com.debruyckere.florian.steamnews.view
 
+import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
+import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -23,6 +27,7 @@ class LoginActivity: AppCompatActivity() {
 
     private lateinit var mLoginViewModel : LoginViewModel
 
+    @SuppressLint("InflateParams")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -63,13 +68,24 @@ class LoginActivity: AppCompatActivity() {
             val email = userText.text.toString()
             val password = passwordText.text.toString()
 
-            mLoginViewModel.createUser(email,password,this,this).observe(this){user ->
-                if(user != null){
-                    Log.d("SUBSCRIPTION","success welcome new user")
-                }else{
-                    Log.d("SUBSCRIPTION","No Don't enter. Failure")
+            val dialog = AlertDialog.Builder(this)
+            dialog.setTitle("Steam Username")
+            val alertView : View = layoutInflater.inflate(R.layout.login_pop,null)
+            val alertEdit = alertView.findViewById<EditText>(R.id.login_edit)
+            val alertButton = alertView.findViewById<Button>(R.id.login_button)
+
+            alertButton.setOnClickListener{
+                mLoginViewModel.createUser(email , password , alertEdit.text.toString() ,this,
+                    this).observe(this){user ->
+                    if(user != null){
+                        Log.d("SUBSCRIPTION","success welcome new user")
+                    }else{
+                        Log.d("SUBSCRIPTION","No Don't enter. Failure")
+                    }
                 }
             }
+
+
         }
 
     }
