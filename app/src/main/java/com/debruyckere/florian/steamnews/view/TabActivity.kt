@@ -12,10 +12,11 @@ import androidx.viewpager.widget.ViewPager
 import com.debruyckere.florian.steamnews.R
 import com.debruyckere.florian.steamnews.view.fragment.CommentFragment
 import com.debruyckere.florian.steamnews.view.fragment.NewsFragment
+import com.google.android.material.tabs.TabLayout
 
 class TabActivity : AppCompatActivity() {
 
-    private var viewPager : ViewPager? = null
+    private lateinit var viewPager : ViewPager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +32,11 @@ class TabActivity : AppCompatActivity() {
         bundle.putString("newsUrl",extraUrl)
 
         viewPager = findViewById(R.id.tab_viewpager)
+        val tabs = findViewById<TabLayout>(R.id.tab_tablayout)
         val adapter = TabAdapter(supportFragmentManager,2,bundle)
-        viewPager!!.adapter = adapter
+        tabs.setupWithViewPager(viewPager)
+
+        viewPager.adapter = adapter
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -69,6 +73,19 @@ class TabActivity : AppCompatActivity() {
 
         override fun getCount(): Int {
             return totalTabs
+        }
+
+        override fun getPageTitle(position: Int): CharSequence {
+            when(position){
+                0 -> run{   //News Tab
+                    return "News" }
+
+                1 -> run{   //Comment Tab
+                    return "Comment" }
+
+                else -> run{
+                    return "News"}
+            }
         }
 
         override fun getItem(position: Int): Fragment {
