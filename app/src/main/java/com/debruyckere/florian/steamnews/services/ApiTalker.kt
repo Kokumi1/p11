@@ -8,7 +8,6 @@ import com.debruyckere.florian.steamnews.BuildConfig
 import com.debruyckere.florian.steamnews.R
 import com.debruyckere.florian.steamnews.model.generatedclass.Game
 import com.debruyckere.florian.steamnews.model.generatedclass.Newsitem
-import com.google.gson.Gson
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -46,12 +45,12 @@ class ApiTalker {
         }
     }
 
-    fun login(pUsername: String, pPassword: String, pContext: Context): LiveData<String>{
+    fun login(pUsername: String, pContext: Context): LiveData<String>{
 
         val apiServe by lazy { create(pContext) }
         val retour : MutableLiveData<String> = MutableLiveData()
 
-        disposable = apiServe.steamIdGetter(BuildConfig.API_KEY, "dflorian")
+        disposable = apiServe.steamIdGetter(BuildConfig.API_KEY, pUsername)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -70,13 +69,8 @@ class ApiTalker {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { result -> retour.postValue(result.response.games)
-                   /* run {
-                        /*val gson = Gson().toJson(result)
-                        println(gson)*/
-                        retour.postValue(result.responseGame.games!!)
-                    }*/
-                },
+                { result -> retour.postValue(result.response.games)},
+
                 { error -> Log.e("retrofit GAME: ", error.stackTraceToString()) })
 
         return retour

@@ -35,8 +35,9 @@ class MainActivity : AppCompatActivity() {
         mMainViewModel.getNews(this, this).observe(this) { list: List<Newsitem> ->
             run {
                 data.clear()
-                data.addAll(list)
+                data.addAll(list.sortedByDescending { it.date })
                 rv.adapter!!.notifyDataSetChanged()
+
             }
         }
 
@@ -96,8 +97,8 @@ class NewsAdapter(private val pData: List<Newsitem>, private val pContext: Conte
         private val newsLayout: LinearLayout = pView.findViewById(R.id.main_layout)
 
         fun display(pNews: Newsitem) {
-            Log.d("AdapterHolder", "pNews: " + pNews.title)
-            newsGameNews.text = pNews.feedname
+            Log.d("AdapterHolder", "pNews: " + pNews.title+" date "+pNews.date)
+            newsGameNews.text = pNews.feedlabel
             newsTitleNews.text = pNews.title
 
             newsLayout.setOnClickListener {

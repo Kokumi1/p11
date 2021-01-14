@@ -61,11 +61,11 @@ class LoginViewModel : ViewModel() {
                     lateinit var steamId : String
                     lateinit var data : HashMap<String,String>
                     val apiTalker = ApiTalker()
-                    apiTalker.login(pUsername,"",pContext).observe(pLifecycleOwner){ result ->
+                    apiTalker.login(pUsername,pContext).observe(pLifecycleOwner){ result ->
                         steamId = result
                             data = hashMapOf(
                             "firebaseUser" to mAuth.currentUser!!.uid,
-                            "steamId" to steamId       //TODO: Add edit pop up for get steam user name and search
+                            "steamId" to steamId
                         )
                     }
 

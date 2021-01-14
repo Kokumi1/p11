@@ -35,13 +35,16 @@ class MainViewModel() : ViewModel() {
             listGame : List<Game> -> kotlin.run {
                 Log.d("GetGames",listGame.size.toString())
 
-                apiTalker.getNews(listGame[0].appid,mContext!!).observe(pCycle){
-
-                    listNews : List<Newsitem> -> kotlin.run {
-
+            val listNews = ArrayList<Newsitem>()
+            for(game in listGame){
+                apiTalker.getNews(game.appid,mContext!!).observe(pCycle){
+                    listNewsGame : List<Newsitem> -> kotlin.run {
+                    listNews.addAll(listNewsGame)
                     mNews.postValue(listNews)
 
                 }}
+            }
+
 
             }
         }
