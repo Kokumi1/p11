@@ -49,7 +49,7 @@ class LoginActivity: AppCompatActivity() {
             Log.d("AUTHENTICATION","Mission Start")
 
             //do authentication
-            mLoginViewModel.getUser(email,password).observe(this){ user ->
+            mLoginViewModel.getUser(email,password,this).observe(this){ user ->
                 if(user != null){
                     //show popup & return to main
 

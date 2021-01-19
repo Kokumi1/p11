@@ -21,7 +21,7 @@ class LoginViewModel : ViewModel() {
     private var mUser : MutableLiveData<FirebaseUser?> = MutableLiveData()
     private val db = Firebase.firestore
 
-    fun getUser(pEmail: String, pPassword : String): LiveData<FirebaseUser?>{
+    fun getUser(pEmail: String, pPassword : String,pContext: Context): LiveData<FirebaseUser?>{
         //auth = FirebaseAuth.getInstance()
 
         if(mAuth.currentUser != null){ val currentUser = mAuth.currentUser }
@@ -36,7 +36,9 @@ class LoginViewModel : ViewModel() {
                         .get()
                         .addOnSuccessListener { result->
                             for(document in result){
-                                Log.d("FIRESTORE ","recherche complete: "+document.id +" "+ document.data)
+                                Log.d("FIRESTORE ","recherche complete: "+document.id +" "+ document.data["steamId"])
+                                val sharedPreferences = pContext.getSharedPreferences("steam",Context.MODE_PRIVATE)
+                                sharedPreferences.edit().putString("id",document.data["steamId"].toString()).apply()
                             }
                         }
                         .addOnFailureListener{exception -> Log.d("FIRESTORE",

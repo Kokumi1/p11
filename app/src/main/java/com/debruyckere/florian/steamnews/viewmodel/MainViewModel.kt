@@ -9,15 +9,13 @@ import androidx.lifecycle.ViewModel
 import com.debruyckere.florian.steamnews.model.generatedclass.Game
 import com.debruyckere.florian.steamnews.model.generatedclass.Newsitem
 import com.debruyckere.florian.steamnews.services.ApiTalker
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 
 /**
  * Created by Debruyckère Florian on 07/10/2020.
  */
-class MainViewModel() : ViewModel() {
+class MainViewModel : ViewModel() {
 
-    var mContext : Context? = null
+    private var mContext : Context? = null
     private var mNews : MutableLiveData<List<Newsitem>> = MutableLiveData()
 
     fun getNews(pCycle: LifecycleOwner, pContext: Context) : LiveData<List<Newsitem>>{
@@ -30,8 +28,11 @@ class MainViewModel() : ViewModel() {
     private fun createNews(pCycle : LifecycleOwner){
 
         val apiTalker = ApiTalker()
+        val sharedPreferences = mContext!!.getSharedPreferences("steam",Context.MODE_PRIVATE)
+        //"76561198358887469"
 
-        apiTalker.getGames("76561198358887469",mContext!!).observe(pCycle){
+        apiTalker.getGames(sharedPreferences.getString("id","0")!!,mContext!!)
+            .observe(pCycle){
             listGame : List<Game> -> kotlin.run {
                 Log.d("GetGames",listGame.size.toString())
 
