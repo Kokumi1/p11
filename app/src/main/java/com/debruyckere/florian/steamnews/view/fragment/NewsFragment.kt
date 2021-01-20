@@ -32,14 +32,12 @@ class NewsFragment : Fragment() {
         val settings = webView.settings
         settings.javaScriptEnabled = true
 
-
         mViewModel!!.getWeb().observe(viewLifecycleOwner){ url: String ->
             run{
                 webView.loadUrl(url)
             }
         }
 
-        // Inflate the layout for this fragment
         return view
     }
 }

@@ -21,6 +21,7 @@ class CommentFragment : Fragment() {
 
     private lateinit var mViewModel: CommentViewModel
     private lateinit var mBundleUrl: String
+    private lateinit var mLoadingBar:ProgressBar
     private val mAuth = FirebaseAuth.getInstance()
 
     @SuppressLint("InflateParams")
@@ -31,6 +32,7 @@ class CommentFragment : Fragment() {
         mViewModel = ViewModelProvider(this).get(CommentViewModel::class.java)
         mBundleUrl = requireArguments().get("newsId").toString()
 
+        mLoadingBar = view.findViewById(R.id.comment_loading)
         val addButton : ImageButton = view.findViewById(R.id.comment_add)
         addButton.setOnClickListener{
             val dialog = AlertDialog.Builder(this.context)
@@ -66,6 +68,7 @@ class CommentFragment : Fragment() {
                 data.clear()
                 data.addAll(list)
                 rv.adapter!!.notifyDataSetChanged()
+                mLoadingBar.visibility = View.GONE
             }
         }
     }

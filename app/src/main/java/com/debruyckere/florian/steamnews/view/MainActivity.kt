@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,6 +17,8 @@ import com.debruyckere.florian.steamnews.model.generatedclass.Newsitem
 import com.debruyckere.florian.steamnews.viewmodel.MainViewModel
 
 private lateinit var mMainViewModel: MainViewModel
+
+private lateinit var mLoadingBar : ProgressBar
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         rv.layoutManager = LinearLayoutManager(baseContext)
         rv.adapter = NewsAdapter(data, this)
 
+        mLoadingBar = findViewById(R.id.main_loading)
 
         //ViewModel update
         mMainViewModel.getNews(this, this).observe(this) { list: List<Newsitem> ->
@@ -37,7 +41,7 @@ class MainActivity : AppCompatActivity() {
                 data.clear()
                 data.addAll(list.sortedByDescending { it.date })
                 rv.adapter!!.notifyDataSetChanged()
-
+                mLoadingBar.visibility = View.GONE
             }
         }
 
