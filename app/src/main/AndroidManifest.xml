@@ -15,7 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".view.TabActivity"/>
-        <activity android:name=".view.ConfigActivity" />
 
         <uses-library
             android:name="com.google.android.wearable"

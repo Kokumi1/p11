@@ -48,31 +48,6 @@ class MainActivity : AppCompatActivity() {
         //Toolbar
         setSupportActionBar(findViewById(R.id.main_toolbar))
     }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean =
-
-        when (item.itemId) {
-
-            R.id.toolbar_login -> {
-                val loginIntent = Intent(this, LoginActivity::class.java)
-                startActivity(loginIntent)
-                true
-            }
-
-            R.id.toolbar_config -> {
-                val configIntent = Intent(this, ConfigActivity::class.java)
-                startActivity(configIntent)
-                true
-            }
-
-            else -> super.onOptionsItemSelected(item)
-        }
-
 }
 
 class NewsAdapter(private val pData: List<Newsitem>, private val pContext: Context) :

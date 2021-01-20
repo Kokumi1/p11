@@ -39,34 +39,20 @@ class TabActivity : AppCompatActivity() {
         viewPager.adapter = adapter
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+   /* override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu,menu)
         return super.onCreateOptionsMenu(menu)
-    }
+    }*/
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
 
-        when (item.itemId){
-
-            R.id.toolbar_login -> {
-                val loginIntent = Intent(this, LoginActivity::class.java)
-                startActivity(loginIntent)
+       if(item.itemId == android.R.id.home){
+                val homeIntent = Intent(this, MainActivity::class.java)
+                startActivity(homeIntent)
                 true
-            }
+       }
+        else super.onOptionsItemSelected(item)
 
-            R.id.toolbar_config-> {
-                val configIntent = Intent(this, ConfigActivity::class.java)
-                startActivity(configIntent)
-                true
-            }
-            android.R.id.home-> {
-            val homeIntent = Intent(this, MainActivity::class.java)
-            startActivity(homeIntent)
-            true
-        }
-
-            else-> super.onOptionsItemSelected(item)
-        }
 
 
     class TabAdapter (fm: FragmentManager, var totalTabs: Int, private val pBundle: Bundle): FragmentPagerAdapter(fm, totalTabs){

@@ -95,35 +95,4 @@ class LoginActivity: AppCompatActivity() {
         }
 
     }
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.toolbar_menu,menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean =
-
-        when (item.itemId){
-
-            R.id.toolbar_login -> {
-                //val loginIntent = Intent(this, LoginActivity::class.java)
-                //startActivity(loginIntent)
-                Toast.makeText(this,"You already are in that place",Toast.LENGTH_SHORT)
-                true
-            }
-
-            R.id.toolbar_config-> {
-                startActivity(Intent(this, ConfigActivity::class.java))
-                true
-            }
-            android.R.id.home-> {
-                //val homeIntent = Intent(this, MainActivity::class.java)
-                //startActivity(homeIntent)
-                Toast.makeText(this,"You have to log before.",Toast.LENGTH_LONG)
-                true
-            }
-
-            else-> super.onOptionsItemSelected(item)
-        }
-
 }
