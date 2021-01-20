@@ -22,6 +22,7 @@ class CommentFragment : Fragment() {
     private lateinit var mViewModel: CommentViewModel
     private lateinit var mBundleUrl: String
     private lateinit var mLoadingBar:ProgressBar
+    private lateinit var mInfoLayout: LinearLayout
     private val mAuth = FirebaseAuth.getInstance()
 
     @SuppressLint("InflateParams")
@@ -32,6 +33,7 @@ class CommentFragment : Fragment() {
         mViewModel = ViewModelProvider(this).get(CommentViewModel::class.java)
         mBundleUrl = requireArguments().get("newsId").toString()
 
+        mInfoLayout = view.findViewById(R.id.comment_info)
         mLoadingBar = view.findViewById(R.id.comment_loading)
         val addButton : ImageButton = view.findViewById(R.id.comment_add)
         addButton.setOnClickListener{
@@ -69,6 +71,7 @@ class CommentFragment : Fragment() {
                 data.addAll(list)
                 rv.adapter!!.notifyDataSetChanged()
                 mLoadingBar.visibility = View.GONE
+                if(data.isEmpty()) mInfoLayout.visibility = View.VISIBLE
             }
         }
     }
@@ -86,6 +89,7 @@ class CommentFragment : Fragment() {
         }
 
         override fun getItemCount(): Int = pData.size
+
 
         class CommentViewHolder(pView: View): RecyclerView.ViewHolder(pView){
 

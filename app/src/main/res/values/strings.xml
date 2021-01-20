@@ -22,6 +22,7 @@
     <string name="tab_comment">Comment</string>
     <string name="comment_description">Add Comment</string>
     <string name="comment_button">post</string>
+    <string name="comment_info">no comment found</string>
 
     <string name="toolbar_config">Configuration</string>
     <string name="toolbar_login">Login</string>
