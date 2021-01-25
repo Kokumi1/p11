@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary">
 
     <EditText
         android:id="@+id/comment_edit"
@@ -9,9 +10,11 @@
         android:layout_height="100dp"
         android:autofillHints="comment"
         android:hint="@string/tab_comment"
+        android:textColorHint="@color/colorText"
         android:inputType="text"
         android:layout_margin="20dp"
         android:layout_centerHorizontal="true"
+        android:textColor="@color/colorText"
         />
 
     <Button
@@ -22,5 +25,7 @@
         android:layout_below="@id/comment_edit"
         android:layout_margin="20dp"
         android:layout_centerHorizontal="true"
+        android:textColor="@color/colorText"
+        android:backgroundTint="@color/colorAccent"
         />
 </RelativeLayout>

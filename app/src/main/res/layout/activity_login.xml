@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.LoginActivity">
+    tools:context=".view.LoginActivity"
+    android:background="@color/colorBackground">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/login_toolbar"
@@ -19,8 +19,9 @@
         android:layout_height="50dp"
         android:text="@string/login_title"
         android:textSize="40sp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="60dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/login_toolbar"
+        android:textColor="@color/colorText"
         />
 
     <EditText
@@ -29,10 +30,13 @@
         android:layout_height="50dp"
         android:layout_alignTop="@id/login_title_text"
         android:layout_marginTop="100dp"
-        android:layout_marginStart="80dp"
+        android:layout_centerHorizontal="true"
         android:autofillHints="login"
         android:hint="@string/login_login"
-        android:inputType="text"/>
+        android:textColorHint="@color/colorText"
+        android:inputType="text"
+        android:textColor="@color/colorText"
+        android:background="@drawable/border"/>
 
     <EditText
         android:id="@+id/login_password_edit"
@@ -40,10 +44,13 @@
         android:layout_height="50dp"
         android:layout_alignTop="@id/login_username_edit"
         android:layout_marginTop="100dp"
-        android:layout_marginStart="80dp"
+        android:layout_centerHorizontal="true"
         android:autofillHints="password"
         android:hint="@string/login_password"
-        android:inputType="textPassword"/>
+        android:textColorHint="@color/colorText"
+        android:inputType="textPassword"
+        android:textColor="@color/colorText"
+        android:background="@drawable/border"/>
 
     <Button
         android:id="@+id/login_validation_button"
@@ -53,17 +60,23 @@
         android:textSize="15sp"
         android:layout_alignTop="@id/login_password_edit"
         android:layout_marginTop="100dp"
-        android:layout_marginStart="130dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/colorText"
+        android:backgroundTint="@color/colorPrimary"
         />
 
     <Button
         android:id="@+id/login_subscribe_button"
         android:layout_width="150dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:text="@string/login_subscribe_button"
+        android:textSize="15sp"
         android:layout_alignTop="@id/login_validation_button"
         android:layout_marginTop="100dp"
-        android:layout_marginStart="130dp"/>
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/border"
+        android:textColor="@color/colorText"
+        />
 
     <ProgressBar
         android:id="@+id/login_loading"

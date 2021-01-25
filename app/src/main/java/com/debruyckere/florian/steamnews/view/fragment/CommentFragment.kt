@@ -42,15 +42,16 @@ class CommentFragment : Fragment() {
             dialog.setMessage("write your comment")
             val alertView : View = inflater.inflate(R.layout.comment_pop,null)
             dialog.setView(alertView)
+            val alertDialog = dialog.create()
 
             val alertEdit = alertView.findViewById<EditText>(R.id.comment_edit)
             val alertButton = alertView.findViewById<Button>(R.id.comment_button)
             alertButton.setOnClickListener{
                 mViewModel.addComment(Comment(mAuth.currentUser!!.displayName!!,alertEdit.text.toString()) , mBundleUrl)
-                //TODO: Close that things!
+                alertDialog.dismiss()
             }
 
-            val alertDialog = dialog.create()
+
             alertDialog.show()
         }
 

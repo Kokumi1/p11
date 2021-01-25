@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragment.NewsFragment">
+    tools:context=".view.fragment.NewsFragment"
+    android:background="@color/colorBackground">
 
     <WebView
         android:id="@+id/web_news"

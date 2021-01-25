@@ -4,14 +4,15 @@
     android:layout_height="90dp"
     android:orientation="vertical"
     android:id="@+id/main_layout"
-    android:background="@drawable/border">
+    android:background="@drawable/border"
+    android:backgroundTint="@color/colorBackground">
 
     <TextView
         android:id="@+id/main_game"
         android:layout_width="match_parent"
         android:layout_height="20dp"
         android:text="@string/main_gamename"
-        android:textColor="#000000"/>
+        android:textColor="@color/colorText"/>
 
     <TextView
         android:id="@+id/main_title"
@@ -19,6 +20,6 @@
         android:layout_height="70dp"
         android:text="@string/main_newstitle"
         android:textSize="30sp"
-        android:textColor="#000000"/>
+        android:textColor="@color/colorText"/>
 
 </LinearLayout>
