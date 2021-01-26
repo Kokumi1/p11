@@ -33,6 +33,7 @@ class LoginActivity: AppCompatActivity() {
 
         setSupportActionBar(findViewById(R.id.login_toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "SteamNews"
 
         var userData: FirebaseUser?
         mLoginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
@@ -63,6 +64,7 @@ class LoginActivity: AppCompatActivity() {
                 else{
                     Log.d("AUTHENTICATION: ","Mission Failed !!")
                     Toast.makeText(this,"authentification failed",Toast.LENGTH_LONG).show()
+                    mLoadingBar.visibility = View.GONE
                 }
             }
         }
