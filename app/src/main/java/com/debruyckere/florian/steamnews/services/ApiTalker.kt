@@ -34,6 +34,7 @@ class ApiTalker {
             interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
             val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
 
+            //create Retrofit
             val retrofit = Retrofit.Builder().addCallAdapterFactory(
                 RxJava2CallAdapterFactory.create()
             )   .client(client)
@@ -45,49 +46,64 @@ class ApiTalker {
         }
     }
 
+    /**
+     * Search steamId in the steamAPI
+     *
+     * @param pUsername steam Username use for the research
+     */
     fun login(pUsername: String, pContext: Context): LiveData<String>{
 
         val apiServe by lazy { create(pContext) }
-        val retour : MutableLiveData<String> = MutableLiveData()
+        val toReturn : MutableLiveData<String> = MutableLiveData()
 
         disposable = apiServe.steamIdGetter(BuildConfig.API_KEY, pUsername)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { result -> retour.postValue(result.response.steamid) },
+                { result -> toReturn.postValue(result.response.steamid) },
                 { error -> Log.e("retrofit ID: ", error.stackTraceToString()) })
 
-        return retour
+        return toReturn
     }
 
+    /**
+     * get the list of games in Steam API
+     *
+     * @param pUserId steamId of the current user
+     */
     fun getGames(pUserId: String, pContext: Context): LiveData<List<Game>>{
 
         val apiServe by lazy { create(pContext) }
-        val retour : MutableLiveData<List<Game>> = MutableLiveData()
+        val toReturn : MutableLiveData<List<Game>> = MutableLiveData()
 
         disposable = apiServe.steamGamesGetter(BuildConfig.API_KEY, pUserId, "true")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { result -> retour.postValue(result.response.games)},
+                { result -> toReturn.postValue(result.response.games)},
 
                 { error -> Log.e("retrofit GAME: ", error.stackTraceToString()) })
 
-        return retour
+        return toReturn
     }
 
+    /**
+     * get a list of 5 news for one games
+     *
+     * @param pGameId id of the games
+     */
     fun getNews(pGameId: Int, pContext: Context): LiveData<List<Newsitem>>{
 
         val apiServe by lazy{ create(pContext)}
-        val retour : MutableLiveData<List<Newsitem>> = MutableLiveData()
+        val toReturn : MutableLiveData<List<Newsitem>> = MutableLiveData()
 
         disposable = apiServe.steamNewsGetter(pGameId, 5, 300)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { result -> retour.postValue(result.appnews.newsitems) },
+                { result -> toReturn.postValue(result.appnews.newsitems) },
                 { error -> Log.e("retrofit NEWS", error.stackTraceToString()) })
 
-        return retour
+        return toReturn
     }
 }

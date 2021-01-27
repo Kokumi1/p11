@@ -3,7 +3,6 @@ package com.debruyckere.florian.steamnews.view
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -22,15 +21,18 @@ class TabActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tab)
 
+        //toolbar
         setSupportActionBar(findViewById(R.id.tab_toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        //get news from intent
         val extraId = intent.getStringExtra("newsId")
         val extraUrl = intent.getStringExtra("newsUrl")
         val bundle = Bundle()
         bundle.putString("newsId",extraId)
         bundle.putString("newsUrl",extraUrl)
 
+        //viewpager
         viewPager = findViewById(R.id.tab_viewpager)
         val tabs = findViewById<TabLayout>(R.id.tab_tablayout)
         val adapter = TabAdapter(supportFragmentManager,2,bundle)
@@ -44,6 +46,9 @@ class TabActivity : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }*/
 
+    /**
+     * add button reaction to toolbar
+     */
     override fun onOptionsItemSelected(item: MenuItem): Boolean =
 
        if(item.itemId == android.R.id.home){
@@ -54,7 +59,9 @@ class TabActivity : AppCompatActivity() {
         else super.onOptionsItemSelected(item)
 
 
-
+    /**
+     * Adapter for TabLayout
+     */
     class TabAdapter (fm: FragmentManager, var totalTabs: Int, private val pBundle: Bundle): FragmentPagerAdapter(fm, totalTabs){
 
         override fun getCount(): Int {

@@ -18,19 +18,26 @@ class MainViewModel : ViewModel() {
     private var mContext : Context? = null
     private var mNews : MutableLiveData<List<Newsitem>> = MutableLiveData()
 
+    /**
+     *
+     */
     fun getNews(pCycle: LifecycleOwner, pContext: Context) : LiveData<List<Newsitem>>{
         mContext = pContext
         createNews(pCycle)
-        //mNews.postValue(tmp)
         return mNews
     }
 
+    /**
+     * get news from API
+     *
+     * @param pCycle lifeCycleOwner from activity for observe ApiTalker
+     */
     private fun createNews(pCycle : LifecycleOwner){
 
         val apiTalker = ApiTalker()
         val sharedPreferences = mContext!!.getSharedPreferences("steam",Context.MODE_PRIVATE)
-        //"76561198358887469"
 
+        //get list of games
         apiTalker.getGames(sharedPreferences.getString("id","0")!!,mContext!!)
             .observe(pCycle){
             listGame : List<Game> -> kotlin.run {
@@ -38,6 +45,7 @@ class MainViewModel : ViewModel() {
 
             val listNews = ArrayList<Newsitem>()
             for(game in listGame){
+                //get list of news for each games
                 apiTalker.getNews(game.appid,mContext!!).observe(pCycle){
                     listNewsGame : List<Newsitem> -> kotlin.run {
                     listNews.addAll(listNewsGame)

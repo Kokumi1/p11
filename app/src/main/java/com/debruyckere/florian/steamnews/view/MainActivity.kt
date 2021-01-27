@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //ViewModel
         val data: MutableList<Newsitem> = mutableListOf()
         mMainViewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
@@ -50,6 +51,9 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
+/**
+ * Adapter for News RecyclerView
+ */
 class NewsAdapter(private val pData: List<Newsitem>, private val pContext: Context) :
     RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
@@ -75,6 +79,9 @@ class NewsAdapter(private val pData: List<Newsitem>, private val pContext: Conte
         private val newsTitleNews: TextView = pView.findViewById(R.id.main_title)
         private val newsLayout: LinearLayout = pView.findViewById(R.id.main_layout)
 
+        /**
+         * display news in a cell
+         */
         fun display(pNews: Newsitem) {
             Log.d("AdapterHolder", "pNews: " + pNews.title+" date "+pNews.date)
             newsGameNews.text = pNews.feedlabel

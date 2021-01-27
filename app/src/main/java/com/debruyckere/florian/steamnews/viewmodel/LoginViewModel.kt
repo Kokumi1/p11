@@ -21,22 +21,28 @@ class LoginViewModel : ViewModel() {
     private var mUser : MutableLiveData<FirebaseUser?> = MutableLiveData()
     private val db = Firebase.firestore
 
+    /**
+     * sign in with firebase
+     *
+     * @param pEmail Email of the account
+     * @param pPassword password of the account
+     */
     fun getUser(pEmail: String, pPassword : String,pContext: Context): LiveData<FirebaseUser?>{
-        //auth = FirebaseAuth.getInstance()
 
-        if(mAuth.currentUser != null){ val currentUser = mAuth.currentUser }
-
+        //sign in
         mAuth.signInWithEmailAndPassword(pEmail,pPassword)
             .addOnCompleteListener{ task ->
                 if(task.isSuccessful) {
                     mUser.postValue(mAuth.currentUser)
 
+                    //get the stored steamID in Firestore
                     db.collection("userId")
                         .whereEqualTo("firebaseUser",mAuth.currentUser!!.uid)
                         .get()
                         .addOnSuccessListener { result->
                             for(document in result){
                                 Log.d("FIRESTORE ","recherche complete: "+document.id +" "+ document.data["steamId"])
+                                //save the steamID in sharedPreferences
                                 val sharedPreferences = pContext.getSharedPreferences("steam",Context.MODE_PRIVATE)
                                 sharedPreferences.edit().putString("id",document.data["steamId"].toString()).apply()
                             }
@@ -53,7 +59,15 @@ class LoginViewModel : ViewModel() {
         return mUser
     }
 
+    /**
+     * subscribe and create new account
+     *
+     * @param pEmail Email of the account
+     * @param pPassword password of the account
+     * @param pUsername Steam Username
+     */
     fun createUser(pEmail: String, pPassword: String,pUsername: String ,pContext: Context,pLifecycleOwner: LifecycleOwner): LiveData<FirebaseUser?>{
+        //Subscribe
         mAuth.createUserWithEmailAndPassword(pEmail,pPassword)
             .addOnCompleteListener{task ->
                 if(task.isSuccessful){
@@ -63,6 +77,7 @@ class LoginViewModel : ViewModel() {
                     lateinit var steamId : String
                     lateinit var data : HashMap<String,String>
                     val apiTalker = ApiTalker()
+                    //get SteamID from SteamAPI
                     apiTalker.login(pUsername,pContext).observe(pLifecycleOwner){ result ->
                         steamId = result
                             data = hashMapOf(
@@ -71,6 +86,7 @@ class LoginViewModel : ViewModel() {
                         )
                     }
 
+                    //save SteamID in Firestore
                     db.collection("userId").document()
                         .set(data)
                         .addOnCompleteListener{fireTask ->

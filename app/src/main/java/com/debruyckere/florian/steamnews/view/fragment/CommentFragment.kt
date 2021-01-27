@@ -30,11 +30,14 @@ class CommentFragment : Fragment() {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_comment, container, false)
 
+        //view model
         mViewModel = ViewModelProvider(this).get(CommentViewModel::class.java)
         mBundleUrl = requireArguments().get("newsId").toString()
 
         mInfoLayout = view.findViewById(R.id.comment_info)
         mLoadingBar = view.findViewById(R.id.comment_loading)
+
+        //add comment button
         val addButton : ImageButton = view.findViewById(R.id.comment_add)
         addButton.setOnClickListener{
             val dialog = AlertDialog.Builder(this.context)
@@ -47,12 +50,12 @@ class CommentFragment : Fragment() {
             val alertEdit = alertView.findViewById<EditText>(R.id.comment_edit)
             val alertButton = alertView.findViewById<Button>(R.id.comment_button)
             alertButton.setOnClickListener{
+                //save comment
                 mViewModel.addComment(Comment(mAuth.currentUser!!.displayName!!,alertEdit.text.toString()) , mBundleUrl)
                 alertDialog.dismiss()
             }
-
-
             alertDialog.show()
+
         }
 
         return view
@@ -66,6 +69,7 @@ class CommentFragment : Fragment() {
         rv.layoutManager = LinearLayoutManager(this.context)
         rv.adapter = CommentAdapter(data)
 
+        //get comment
         mViewModel.getComment(mBundleUrl).observe(viewLifecycleOwner){list : List<Comment> ->
             run{
                 data.clear()
@@ -77,6 +81,11 @@ class CommentFragment : Fragment() {
         }
     }
 
+    /**
+     * adapter for comment RecyclerView
+     *
+     * @param pData list of comment to show
+     */
     class CommentAdapter(private val pData: List<Comment>): RecyclerView.Adapter<CommentAdapter.CommentViewHolder>(){
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {
@@ -97,6 +106,11 @@ class CommentFragment : Fragment() {
             private val userText : TextView = itemView.findViewById(R.id.comment_user)
             private val contentText : TextView = itemView.findViewById(R.id.comment_content)
 
+            /**
+             * show comment in cell
+             *
+             * @param pComment comment to show
+             */
             fun display(pComment: Comment){
                 userText.text = pComment.user
                 contentText.text = pComment.content

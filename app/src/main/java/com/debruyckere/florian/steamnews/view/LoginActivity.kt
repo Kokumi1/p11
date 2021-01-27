@@ -3,11 +3,8 @@ package com.debruyckere.florian.steamnews.view
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.content.Intent
-import android.opengl.Visibility
 import android.os.Bundle
 import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -31,10 +28,12 @@ class LoginActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+        //toolbar
         setSupportActionBar(findViewById(R.id.login_toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "SteamNews"
 
+        //viewModel
         var userData: FirebaseUser?
         mLoginViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
@@ -44,6 +43,7 @@ class LoginActivity: AppCompatActivity() {
         subscribeButton = findViewById(R.id.login_subscribe_button)
         mLoadingBar= findViewById(R.id.login_loading)
 
+        //login button
         validButton.setOnClickListener{
             val email = userText.text.toString()
             val password = passwordText.text.toString()
@@ -51,7 +51,7 @@ class LoginActivity: AppCompatActivity() {
 
             mLoadingBar.visibility = View.VISIBLE
 
-            //do authentication
+            //do log in
             mLoginViewModel.getUser(email,password,this).observe(this){ user ->
                 if(user != null){
                     //show popup & return to main
@@ -69,16 +69,19 @@ class LoginActivity: AppCompatActivity() {
             }
         }
 
+        //subscribe button
         subscribeButton.setOnClickListener{
             val email = userText.text.toString()
             val password = passwordText.text.toString()
 
+            //alert dialog
             val dialog = AlertDialog.Builder(this)
             dialog.setTitle("Steam Username")
             val alertView : View = layoutInflater.inflate(R.layout.login_pop,null)
             val alertEdit = alertView.findViewById<EditText>(R.id.login_edit)
             val alertButton = alertView.findViewById<Button>(R.id.login_button)
 
+            //do the subscribe
             alertButton.setOnClickListener{
                 mLoadingBar.visibility = View.VISIBLE
                 mLoginViewModel.createUser(email , password , alertEdit.text.toString() ,this,

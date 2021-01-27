@@ -21,12 +21,15 @@ class NewsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val view = inflater.inflate(R.layout.fragment_news, container, false)
         val bundleUrl = requireArguments().get("newsUrl").toString()
 
+        //view model
         mViewModel = ViewModelProvider(this).get(NewsViewModel::class.java)
         mViewModel!!.setWeb(bundleUrl)
 
+        //webView
         val webView : WebView = view.findViewById(R.id.web_news)
         webView.webViewClient = WebViewClient()
         val settings = webView.settings

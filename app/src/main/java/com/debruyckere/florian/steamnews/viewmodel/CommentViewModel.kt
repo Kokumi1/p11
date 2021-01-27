@@ -16,7 +16,12 @@ class CommentViewModel : ViewModel() {
     private val db = Firebase.firestore
 
     private var mComment : MutableLiveData<List<Comment>> = MutableLiveData()
-    
+
+    /**
+     * get the list of comment from Firestore
+     *
+     * @param pArticleId id of the news
+     */
     fun getComment(pArticleId: String) : LiveData<List<Comment>>{
 
         db.collection(pArticleId)
@@ -38,6 +43,12 @@ class CommentViewModel : ViewModel() {
         return mComment
     }
 
+    /**
+     * save a comment in firestore
+     *
+     * @param pComment comment to save
+     * @param newsId id of the news
+     */
     fun addComment(pComment : Comment,newsId : String){
 
         val data = hashMapOf(

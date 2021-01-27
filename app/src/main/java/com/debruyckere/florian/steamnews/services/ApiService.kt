@@ -12,12 +12,25 @@ import retrofit2.http.Query
  */
 interface ApiService {
 
+    /**
+     * make the query to get the Steam ID
+     *
+     * @param key Steam API Key
+     * @param vanityurl Steam Username
+     */
     @GET("ISteamUser/ResolveVanityURL/v0001/")
     fun steamIdGetter(
         @Query("key") key: String,
         @Query("vanityurl") vanityurl: String):
             Observable<ApiID>
 
+    /**
+     * make the query to get the list of games
+     *
+     * @param key Steam API Key
+     * @param steamid Steam UserID
+     * @param includeFreeGames add free games to the list
+     */
     @GET("IPlayerService/GetOwnedGames/v0001/")
     fun steamGamesGetter(
         @Query("key")key: String,
@@ -25,6 +38,13 @@ interface ApiService {
         @Query("include_played_free_games")includeFreeGames: String
     ): Observable<ApiGame>
 
+    /**
+     * make the query to get news for a games
+     *
+     * @param appid id of the Game
+     * @param count how many news entries
+     * @param maxlength Maximum length of each news entry
+     */
     @GET("ISteamNews/GetNewsForApp/v0002/")
     fun steamNewsGetter(
         @Query("appid")appid : Int,
