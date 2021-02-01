@@ -52,7 +52,7 @@ class LoginActivity: AppCompatActivity() {
             mLoadingBar.visibility = View.VISIBLE
 
             //do log in
-            mLoginViewModel.getUser(email,password,this).observe(this){ user ->
+            mLoginViewModel.getUser(email,password,this,this).observe(this){ user ->
                 if(user != null){
                     //show popup & return to main
 

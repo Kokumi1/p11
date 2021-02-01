@@ -1,5 +1,6 @@
 package com.debruyckere.florian.steamnews
 
+import com.debruyckere.florian.steamnews.model.Comment
 import org.junit.Test
 
 import org.junit.Assert.*
@@ -11,9 +12,9 @@ import org.junit.Assert.*
  */
 class ExampleUnitTest {
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun commentTest(){
+        val comment = Comment("user","comment")
+
+        assertEquals("comment",comment.content)
     }
-
-
 }

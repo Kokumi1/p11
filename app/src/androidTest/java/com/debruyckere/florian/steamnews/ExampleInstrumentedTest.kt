@@ -1,7 +1,9 @@
 package com.debruyckere.florian.steamnews
 
+import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.debruyckere.florian.steamnews.services.ApiTalker
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -15,10 +17,27 @@ import org.junit.Assert.*
  */
 @RunWith(AndroidJUnit4::class)
 class ExampleInstrumentedTest {
+    private lateinit var appContext: Context
     @Test
     fun useAppContext() {
         // Context of the app under test.
-        val appContext = InstrumentationRegistry.getInstrumentation().targetContext
+        appContext = InstrumentationRegistry.getInstrumentation().targetContext
         assertEquals("com.debruyckere.florian.steamnews", appContext.packageName)
+    }
+
+    @Test
+    fun loginTest(){
+        appContext = InstrumentationRegistry.getInstrumentation().targetContext
+
+        val apiTalker = ApiTalker()
+        assertEquals("76561198358887469",apiTalker.login("kokumi",appContext))
+    }
+
+    @Test
+    fun getGamesTest(){
+        appContext = InstrumentationRegistry.getInstrumentation().targetContext
+
+        val apiTalker = ApiTalker()
+        assert(apiTalker.getGames("76561198358887469",appContext).value!!.isNotEmpty())
     }
 }
