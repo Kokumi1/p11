@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.debruyckere.florian.steamnews.services.ApiTalker
+import com.debruyckere.florian.steamnews.services.ServerTalker
 
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -39,5 +40,12 @@ class ExampleInstrumentedTest {
 
         val apiTalker = ApiTalker()
         assert(apiTalker.getGames("76561198358887469",appContext).value!!.isNotEmpty())
+    }
+
+    @Test
+    fun getFirebaseUser(){
+        appContext = InstrumentationRegistry.getInstrumentation().targetContext
+
+        assert(ServerTalker().getSteamId("fldebruyck@gmail.com","Punigi",appContext).value != null)
     }
 }
