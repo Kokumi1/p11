@@ -13,7 +13,7 @@
         android:layout_height="?actionBarSize"
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:titleTextAppearance="@color/colorText"/>
+        app:titleTextColor="@color/colorText"/>
 
     <TextView
         android:id="@+id/login_title_text"

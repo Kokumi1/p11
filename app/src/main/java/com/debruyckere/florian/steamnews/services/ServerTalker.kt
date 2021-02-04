@@ -31,15 +31,17 @@ class ServerTalker {
         mAuth.signInWithEmailAndPassword(pEmail,pPassword)
             .addOnCompleteListener{ task ->
                 if(task.isSuccessful) {
-                    user.postValue(mAuth.currentUser)
-
+                    Log.d("FIREBASE AUTH",mAuth.currentUser!!.uid)
                     //get the stored steamID in Firestore
                     db.collection("userId")
                         .whereEqualTo("firebaseUser",mAuth.currentUser!!.uid)
                         .get()
                         .addOnSuccessListener { result->
+                            Log.d("FIRESTORE",result.size().toString())
                             for(document in result){
                                 Log.d("FIRESTORE ","recherche complete: "+document.id +" "+ document.data["steamId"])
+                                user.postValue(mAuth.currentUser)
+
                                 //save the steamID in sharedPreferences
                                 val sharedPreferences = pContext.getSharedPreferences("steam",
                                     Context.MODE_PRIVATE)

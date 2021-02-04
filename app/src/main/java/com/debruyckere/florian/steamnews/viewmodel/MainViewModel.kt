@@ -19,7 +19,7 @@ class MainViewModel : ViewModel() {
     private var mNews : MutableLiveData<List<Newsitem>> = MutableLiveData()
 
     /**
-     *
+     * get News
      */
     fun getNews(pCycle: LifecycleOwner, pContext: Context) : LiveData<List<Newsitem>>{
         mContext = pContext
@@ -36,26 +36,32 @@ class MainViewModel : ViewModel() {
 
         val apiTalker = ApiTalker()
         val sharedPreferences = mContext!!.getSharedPreferences("steam",Context.MODE_PRIVATE)
+        val steamId = sharedPreferences.getString("id","0")
+        Log.d("STEAMID",steamId!!)
+        if(steamId != "0") {
+            //get list of games
+            apiTalker.getGames(steamId, mContext!!)
+                .observe(pCycle) { listGame: List<Game> ->
+                    kotlin.run {
+                        Log.d("GetGames", listGame.size.toString())
 
-        //get list of games
-        apiTalker.getGames(sharedPreferences.getString("id","0")!!,mContext!!)
-            .observe(pCycle){
-            listGame : List<Game> -> kotlin.run {
-                Log.d("GetGames",listGame.size.toString())
+                        val listNews = ArrayList<Newsitem>()
+                        for (game in listGame) {
+                            //get list of news for each games
+                            apiTalker.getNews(game.appid, mContext!!)
+                                .observe(pCycle) { listNewsGame: List<Newsitem> ->
+                                    kotlin.run {
+                                        listNews.addAll(listNewsGame)
+                                        mNews.postValue(listNews)
 
-            val listNews = ArrayList<Newsitem>()
-            for(game in listGame){
-                //get list of news for each games
-                apiTalker.getNews(game.appid,mContext!!).observe(pCycle){
-                    listNewsGame : List<Newsitem> -> kotlin.run {
-                    listNews.addAll(listNewsGame)
-                    mNews.postValue(listNews)
-
-                }}
-            }
+                                }
+                            }
+                        }
 
 
-            }
+                    }
+                }
         }
+        else mNews.postValue(ArrayList())
     }
 }

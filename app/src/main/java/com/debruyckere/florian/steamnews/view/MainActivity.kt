@@ -9,6 +9,7 @@ import android.view.*
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -43,6 +44,7 @@ class MainActivity : AppCompatActivity() {
                 data.addAll(list.sortedByDescending { it.date })
                 rv.adapter!!.notifyDataSetChanged()
                 mLoadingBar.visibility = View.GONE
+                if(list.isEmpty()) Toast.makeText(this,"Error: no news found",Toast.LENGTH_LONG).show()
             }
         }
 

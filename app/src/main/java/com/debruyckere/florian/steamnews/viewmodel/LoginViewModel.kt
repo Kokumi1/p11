@@ -22,6 +22,7 @@ class LoginViewModel : ViewModel() {
      * @param pPassword password of the account
      */
     fun getUser(pEmail: String, pPassword : String,pContext: Context,pLifecycleOwner: LifecycleOwner): LiveData<FirebaseUser?>{
+        mUser = MutableLiveData()
         ServerTalker().getSteamId(pEmail,pPassword,pContext).observe(pLifecycleOwner){
             mUser.postValue(it)
         }
