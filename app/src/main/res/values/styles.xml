@@ -7,6 +7,8 @@
         <item name="colorAccent">#313D53</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:colorControlNormal">@color/colorText</item>
+        <item name="navigationIconTint">@color/colorText</item>
     </style>
 
     <style name="DefaultTheme" parent="Theme.AppCompat.Light.DarkActionBar">

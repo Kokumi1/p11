@@ -32,6 +32,7 @@ class LoginActivity: AppCompatActivity() {
         setSupportActionBar(findViewById(R.id.login_toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = "SteamNews"
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.back_button)
 
         //viewModel
         var userData: FirebaseUser?

@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         android:background="@color/colorPrimary"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"/>
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:titleTextColor="@color/colorText"/>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_tablayout"
@@ -23,7 +24,7 @@
         android:background="@color/colorPrimaryDark"
         app:tabTextColor="@color/common_google_signin_btn_text_dark_default"
         app:tabIndicatorColor="@color/colorPrimary"
-        app:tabSelectedTextColor="@color/colorAccent"/>
+        app:tabSelectedTextColor="#707D9E"/>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/tab_viewpager"

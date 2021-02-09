@@ -24,6 +24,8 @@ class TabActivity : AppCompatActivity() {
         //toolbar
         setSupportActionBar(findViewById(R.id.tab_toolbar))
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.title = "SteamNews"
+        supportActionBar?.setHomeAsUpIndicator(R.drawable.back_button)
 
         //get news from intent
         val extraId = intent.getStringExtra("newsId")
