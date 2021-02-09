@@ -3,6 +3,7 @@ package com.debruyckere.florian.steamnews.view.fragment
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.debruyckere.florian.steamnews.R
 import com.debruyckere.florian.steamnews.model.Comment
 import com.debruyckere.florian.steamnews.viewmodel.CommentViewModel
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 
 class CommentFragment : Fragment() {
@@ -23,7 +25,7 @@ class CommentFragment : Fragment() {
     private lateinit var mBundleUrl: String
     private lateinit var mLoadingBar:ProgressBar
     private lateinit var mInfoLayout: LinearLayout
-    private val mAuth = FirebaseAuth.getInstance()
+    private var mDisplay = Firebase.auth.currentUser!!.email!!
 
     @SuppressLint("InflateParams")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -51,7 +53,8 @@ class CommentFragment : Fragment() {
             val alertButton = alertView.findViewById<Button>(R.id.comment_button)
             alertButton.setOnClickListener{
                 //save comment
-                mViewModel.addComment(Comment(mAuth.currentUser!!.displayName!!,alertEdit.text.toString()) , mBundleUrl)
+                Log.d("COMMENT","display: "+mDisplay+" comment: "+alertEdit.text.toString())
+                mViewModel.addComment(Comment(mDisplay,alertEdit.text.toString()) , mBundleUrl)
                 alertDialog.dismiss()
             }
             alertDialog.show()

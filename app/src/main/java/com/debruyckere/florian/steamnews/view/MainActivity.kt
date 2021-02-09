@@ -2,6 +2,7 @@ package com.debruyckere.florian.steamnews.view
 
 import android.content.Context
 import android.content.Intent
+import android.opengl.Visibility
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -90,6 +91,7 @@ class NewsAdapter(private val pData: List<Newsitem>, private val pContext: Conte
             newsTitleNews.text = pNews.title
 
             newsLayout.setOnClickListener {
+                mLoadingBar.visibility = View.VISIBLE
                 val tabActivity = Intent(pContext, TabActivity::class.java)
                  tabActivity.putExtra("newsUrl",pNews.url)
                 tabActivity.putExtra("newsId",pNews.gid)

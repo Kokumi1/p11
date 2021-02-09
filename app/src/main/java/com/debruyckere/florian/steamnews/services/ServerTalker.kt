@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -15,7 +16,7 @@ import com.google.firebase.ktx.Firebase
  */
 class ServerTalker {
 
-    private var mAuth : FirebaseAuth = FirebaseAuth.getInstance()
+    private var mAuth : FirebaseAuth = Firebase.auth
     private val db = Firebase.firestore
 
     /**
@@ -32,6 +33,7 @@ class ServerTalker {
             .addOnCompleteListener{ task ->
                 if(task.isSuccessful) {
                     Log.d("FIREBASE AUTH",mAuth.currentUser!!.uid)
+                    Log.d("FIREBASE AUTH", mAuth.currentUser!!.email!!)
                     //get the stored steamID in Firestore
                     db.collection("userId")
                         .whereEqualTo("firebaseUser",mAuth.currentUser!!.uid)
