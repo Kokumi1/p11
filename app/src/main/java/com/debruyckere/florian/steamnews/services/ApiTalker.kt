@@ -1,6 +1,7 @@
 package com.debruyckere.florian.steamnews.services
 
 import android.content.Context
+import android.content.res.Resources
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -8,6 +9,7 @@ import com.debruyckere.florian.steamnews.BuildConfig
 import com.debruyckere.florian.steamnews.R
 import com.debruyckere.florian.steamnews.model.generatedclass.Game
 import com.debruyckere.florian.steamnews.model.generatedclass.Newsitem
+import com.google.rpc.context.AttributeContext
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -39,7 +41,8 @@ class ApiTalker {
                 RxJava2CallAdapterFactory.create()
             )   .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl(pContext.resources.getString(R.string.steamId_url))
+                //.baseUrl(pContext.resources.getString(R.string.steamId_url))
+                .baseUrl("http://api.steampowered.com/")
                 .build()
 
             return retrofit.create(ApiService::class.java)

@@ -115,6 +115,7 @@ class CommentFragment : Fragment() {
              * @param pComment comment to show
              */
             fun display(pComment: Comment){
+                Log.d("comment","user: "+pComment.user+" comment "+pComment.content)
                 userText.text = pComment.user
                 contentText.text = pComment.content
             }
