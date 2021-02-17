@@ -1,15 +1,12 @@
 package com.debruyckere.florian.steamnews.services
 
 import android.content.Context
-import android.content.res.Resources
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.debruyckere.florian.steamnews.BuildConfig
-import com.debruyckere.florian.steamnews.R
 import com.debruyckere.florian.steamnews.model.generatedclass.Game
 import com.debruyckere.florian.steamnews.model.generatedclass.Newsitem
-import com.google.rpc.context.AttributeContext
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -23,9 +20,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 /**
  * Created by Debruyckère Florian on 07/10/2020.
  */
+val BASE_URL = "http://api.steampowered.com/"
 class ApiTalker {
-
-    //private val apiServe by lazy { create() }
 
     private var disposable : Disposable? = null
 
@@ -42,7 +38,7 @@ class ApiTalker {
             )   .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 //.baseUrl(pContext.resources.getString(R.string.steamId_url))
-                .baseUrl("http://api.steampowered.com/")
+                .baseUrl(BASE_URL)
                 .build()
 
             return retrofit.create(ApiService::class.java)
